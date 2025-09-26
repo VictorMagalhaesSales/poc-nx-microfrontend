@@ -5,7 +5,7 @@ const config: ModuleFederationConfig = {
   remotes: [
     [
       'login',
-      'http://localhost:4201/mf-manifest.json',
+      'login@http://localhost:4201/mf-manifest.json',
     ],
   ],
 };
