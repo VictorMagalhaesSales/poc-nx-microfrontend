@@ -5,8 +5,8 @@ export const appRoutes: Route[] = [
   {
     path: 'login',
     loadChildren: () =>
-      loadRemote<typeof import('login/Routes')>('login/Routes').then(
-        (m) => m!.remoteRoutes
+      loadRemote/*<typeof import('login/Routes')>*/('login/Routes').then(
+        (m: any) => m.remoteRoutes
       ),
   }
 ];
