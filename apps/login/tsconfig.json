@@ -12,7 +12,6 @@
     "emitDecoratorMetadata": false,
     "module": "preserve",
     "paths": {
-      "@ng-mf/data-access-user": ["libs/shared/data-access-user/src/index.ts"],
       "*": ["../../@mf-types/*"]
     }
   },

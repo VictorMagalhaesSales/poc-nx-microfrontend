@@ -1,9 +1,9 @@
 import { ModuleFederationConfig } from '@nx/module-federation';
 
 const config: ModuleFederationConfig = {
-  name: 'poc_remote',
+  name: 'poc-remote',
   exposes: {
-    './Routes': 'apps/poc_remote/src/app/entry.routes.ts',
+    './Routes': 'apps/poc-remote/src/app/entry.routes.ts',
   },
 };
 

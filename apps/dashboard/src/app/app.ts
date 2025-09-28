@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { UserAuthService } from '@ng-mf/data-access-user';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { UserAuthService } from './user-auth';
 
 @Component({
   standalone: true,

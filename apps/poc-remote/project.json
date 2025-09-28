@@ -1,29 +1,29 @@
 {
-  "name": "poc_remote",
+  "name": "poc-remote",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/poc_remote/src",
+  "sourceRoot": "apps/poc-remote/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/poc_remote",
-        "index": "apps/poc_remote/src/index.html",
-        "main": "apps/poc_remote/src/main.ts",
+        "outputPath": "dist/apps/poc-remote",
+        "index": "apps/poc-remote/src/index.html",
+        "main": "apps/poc-remote/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/poc_remote/tsconfig.app.json",
+        "tsConfig": "apps/poc-remote/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/poc_remote/public"
+            "input": "apps/poc-remote/public"
           }
         ],
-        "styles": ["apps/poc_remote/src/styles.css"],
+        "styles": ["apps/poc-remote/src/styles.css"],
         "customWebpackConfig": {
-          "path": "apps/poc_remote/webpack.config.ts"
+          "path": "apps/poc-remote/webpack.config.ts"
         }
       },
       "configurations": {
@@ -42,7 +42,7 @@
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "apps/poc_remote/webpack.prod.config.ts"
+            "path": "apps/poc-remote/webpack.prod.config.ts"
           }
         },
         "development": {
@@ -65,10 +65,10 @@
       },
       "configurations": {
         "production": {
-          "buildTarget": "poc_remote:build:production"
+          "buildTarget": "poc-remote:build:production"
         },
         "development": {
-          "buildTarget": "poc_remote:build:development"
+          "buildTarget": "poc-remote:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "poc_remote:build"
+        "buildTarget": "poc-remote:build"
       }
     },
     "lint": {
@@ -87,16 +87,16 @@
       "executor": "@nx/web:file-server",
       "defaultConfiguration": "production",
       "options": {
-        "buildTarget": "poc_remote:build",
+        "buildTarget": "poc-remote:build",
         "port": 4202,
         "watch": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "poc_remote:build:development"
+          "buildTarget": "poc-remote:build:development"
         },
         "production": {
-          "buildTarget": "poc_remote:build:production"
+          "buildTarget": "poc-remote:build:production"
         }
       }
     }

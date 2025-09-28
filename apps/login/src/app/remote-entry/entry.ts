@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserAuthService } from '@ng-mf/data-access-user';
 import { inject } from '@angular/core';
+import { UserAuthService } from '../user-auth';
 
 @Component({
   standalone: true,
