@@ -1,27 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, ViewContainerRef } from '@angular/core';
-import { loadRemote } from '@module-federation/enhanced/runtime';
+import { Component } from '@angular/core';
+import { FacadeComponent } from '@ng-mf/poc-facade-lib';
 
 @Component({
   selector: 'app-remote-loader',
-  imports: [CommonModule],
+  imports: [CommonModule, FacadeComponent],
   template: `
     <div class="remote-loader-card">
         <h2>Host Application</h2>
         Lorem ipsum dolor sit amet. Est consequatur quis qui perferendis natus a possimus consectetur ut aliquam dolor nam magni quia. Est nobis eaque vel itaque rerum cum pariatur voluptas et architecto eligendi. Hic nobis ipsum eum animi quod vel deleniti neque qui quod nesciunt.
 
-        <button class="load-btn" (click)="loadRemoteModule()">
-            {{ isLoading ? 'Loading...' : 'Load Remote Component' }}
+        <button class="load-btn" (click)="handleRemoteModuleButton()">
+           {{ remoteLoaded ? 'Hidden Remote Component' : 'Load Remote Component' }}
         </button>
+    </div>
 
-        <div *ngIf="remoteLoaded && !isLoading">
-            <div class="success-box">
-                <span>Remote component loaded successfully!</span>
-            </div>
-        </div>
+    <lib-facade
+      *ngIf="remoteLoaded"
+      [cardTitle]="componentCardTitle"
+      [cardDescription]="componentCardDescription"
+    />
+
+    <div class="success-box" *ngIf="remoteLoaded">
+        <span>Remote component loaded successfully!</span>
     </div>
   `,
   styles: `
+    * {
+        font-family: Arial, sans-serif;
+    }
+
     .remote-loader-card {
         height: 300px;
         max-width: 420px;
@@ -30,7 +38,6 @@ import { loadRemote } from '@module-federation/enhanced/runtime';
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         text-align: center;
-        font-family: Arial, sans-serif;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -53,30 +60,25 @@ import { loadRemote } from '@module-federation/enhanced/runtime';
     }
 
     .success-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 12px;
+        padding: 20px;
+        margin: 20px;
+        position: fixed;
+        right: 0;
+        bottom: 0;
         border-radius: 8px;
-        background: #e9f9f1;
-        color: #2e7d32;
+        background: #2dc97b;
+        color: #ffffff;
         font-weight: 500;
     }
   `,
 })
 export class RemoteLoaderComponent {
-  isLoading = false;
+  componentCardTitle = 'Remote Component';
+  componentCardDescription = 'Lorem ipsum dolor sit amet. Est omnis recusandae est necessitatibus aspernatur nam neque sint. Ut reiciendis pariatur quo saepe quia qui maxime impedit sit inventore dolore ex tempora quia! Ad itaque nobis qui inventore quis eos sequi aspernatur.';
   remoteLoaded = false;
-  vcf = inject(ViewContainerRef);
 
-  async loadRemoteModule() {
-    this.isLoading = true;
-
-    loadRemote('poc-remote/RemoteComponent').then((m: any) => {
-      this.vcf. createComponent(m.RemoteComponent);
-      this.isLoading = false;
-      this.remoteLoaded = true;
-    })
+  handleRemoteModuleButton() {
+      this.remoteLoaded = !this.remoteLoaded;
   }
+
 }

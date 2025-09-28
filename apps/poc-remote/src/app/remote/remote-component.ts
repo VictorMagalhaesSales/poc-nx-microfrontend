@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-remote-component',
   template: `
     <div class="remote-widget-card">
-        <h3>Remote Component</h3>
-        <p>Lorem ipsum dolor sit amet. Est omnis recusandae est necessitatibus aspernatur nam neque sint. Ut reiciendis pariatur quo saepe quia qui maxime impedit sit inventore dolore ex tempora quia! Ad itaque nobis qui inventore quis eos sequi aspernatur. </p>
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
     </div>
   `,
   styles: `
@@ -23,4 +23,6 @@ import { Component } from '@angular/core';
   `,
 })
 export class RemoteComponent {
+  @Input() title!: string;
+  @Input() description!: string;
 }
