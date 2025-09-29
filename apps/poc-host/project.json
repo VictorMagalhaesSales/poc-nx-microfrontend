@@ -21,6 +21,7 @@
             "input": "apps/poc-host/public"
           }
         ],
+        "styles": ["apps/poc-remote/src/styles.css"],
         "customWebpackConfig": {
           "path": "apps/poc-host/webpack.config.ts"
         }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RemoteComponent } from './remote/remote-component';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  imports: [RemoteComponent],
+  imports: [RouterModule],
   selector: 'app-component',
-  template: `<app-remote-component/>`,
+  template: `<router-outlet></router-outlet>`
 })
 export class App {}

@@ -2,15 +2,15 @@ import { Component, inject, Input, OnInit, ViewContainerRef } from '@angular/cor
 import { loadRemote } from '@module-federation/enhanced/runtime';
 
 @Component({
-  selector: 'lib-facade',
+  selector: 'lib-facade-component',
   imports: [],
   template: ``
 })
 export class FacadeComponent implements OnInit {
+  vcf = inject(ViewContainerRef);
 
   @Input({required: true}) cardTitle!: string;
   @Input({required: true}) cardDescription!: string;
-  vcf = inject(ViewContainerRef);
 
   ngOnInit(): void {
 

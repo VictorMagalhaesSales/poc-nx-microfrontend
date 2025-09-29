@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FacadeComponent } from '@ng-mf/poc-facade-lib';
+import { Component, OnInit } from '@angular/core';
+import { DialogComponentFacade, FacadeComponent } from '@ng-mf/poc-facade-lib';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-remote-loader',
-  imports: [CommonModule, FacadeComponent],
+  imports: [CommonModule, FacadeComponent, DialogComponentFacade],
   template: `
     <div class="remote-loader-card">
         <h2>Host Application</h2>
@@ -13,25 +14,34 @@ import { FacadeComponent } from '@ng-mf/poc-facade-lib';
         <button class="load-btn" (click)="handleRemoteModuleButton()">
            {{ remoteLoaded ? 'Hidden Remote Component' : 'Load Remote Component' }}
         </button>
+
+        <button class="load-btn" (click)="handleRemoteDialogButton()">
+           Load Remote Dialog
+        </button>
     </div>
 
-    <lib-facade
+    <lib-facade-component
       *ngIf="remoteLoaded"
       [cardTitle]="componentCardTitle"
       [cardDescription]="componentCardDescription"
     />
 
+    <lib-facade-dialog
+      *ngIf="dialogLoaded"
+      [dialogTitle]="dialogTitle"
+      [hideModalEmitter]="hideModalEmitter"
+    />
+
     <div class="success-box" *ngIf="remoteLoaded">
         <span>Remote component loaded successfully!</span>
     </div>
+    <div class="success-box" *ngIf="dialogLoaded">
+        <span>Remote dialog loaded successfully!</span>
+    </div>
   `,
   styles: `
-    * {
-        font-family: Arial, sans-serif;
-    }
-
     .remote-loader-card {
-        height: 300px;
+        height: 400px;
         max-width: 420px;
         margin: 40px auto;
         padding: 24px;
@@ -72,13 +82,28 @@ import { FacadeComponent } from '@ng-mf/poc-facade-lib';
     }
   `,
 })
-export class RemoteLoaderComponent {
+export class RemoteLoaderComponent implements OnInit {
   componentCardTitle = 'Remote Component';
   componentCardDescription = 'Lorem ipsum dolor sit amet. Est omnis recusandae est necessitatibus aspernatur nam neque sint. Ut reiciendis pariatur quo saepe quia qui maxime impedit sit inventore dolore ex tempora quia! Ad itaque nobis qui inventore quis eos sequi aspernatur.';
+  dialogTitle = 'Remote Dialog';
   remoteLoaded = false;
+  dialogLoaded = false;
+  hideModalEmitter = new Subject<void>();
+
+  ngOnInit(): void {
+    this.hideModalEmitter
+      .asObservable()
+      .subscribe(() => {
+        this.dialogLoaded = false;
+      })
+  }
 
   handleRemoteModuleButton() {
       this.remoteLoaded = !this.remoteLoaded;
+  }
+
+  handleRemoteDialogButton() {
+      this.dialogLoaded = true
   }
 
 }
