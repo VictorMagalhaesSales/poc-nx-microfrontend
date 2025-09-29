@@ -3,6 +3,7 @@ import { Button } from 'primeng/button';
 import { Dialog } from 'primeng/dialog';
 import { InputText } from 'primeng/inputtext';
 import { Subject } from 'rxjs';
+import { RemoteDialogComponent } from '@ng-mf/poc-facade-lib';
 
 @Component({
   selector: 'app-remote-component',
@@ -13,7 +14,7 @@ import { Subject } from 'rxjs';
       [modal]="true" 
       [(visible)]="showDialog" 
       [style]="{ width: '25rem' }"
-      (onHide)="hideModal()"
+      (onHide)="onHideModal()"
     >
         <span class="dialog-description">Update your information.</span>
         
@@ -48,13 +49,21 @@ import { Subject } from 'rxjs';
     }
   `]
 })
-export class RemoteDialog {
+export class RemoteDialog implements RemoteDialogComponent {
   @Input() title!: string;
   @Input() hideModalEmitter!: Subject<void>;
 
-  showDialog = true; 
+  showDialog = false;
 
-  hideModal() {
+  openModal() {
+    this.showDialog = true;
+  }
+
+  closeModal() {
+    this.showDialog = false;
+  }
+
+  onHideModal() {
     this.hideModalEmitter.next();
   }
 }
